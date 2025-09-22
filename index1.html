@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Viajes</title>
+    <link rel="stylesheet" href="ventana_dise.css">
+</head>
+<body>
+    <h2>Elige un destino:</h2>
+    
+    <select id="selectorPaisaje">
+        <option value="">-- Selecciona --</option>
+        <option value="bosque">Estados Unidos</option>
+        <option value="playa">Canada</option>
+        <option value="montaña">México</option>
+        <option value="desierto">Japón</option>
+        <option value="frio">Alemania</option>
+        <option value="romance">Francia</option>
+        
+    </select>
+
+    <!-- Ventana lateral -->
+    <div class="ventana" id="ventana">
+        <img id="imagenPaisaje" src="" alt="">
+        <p id="descripcionPaisaje"></p>
+    </div>
+
+    <script>
+           const selector = document.getElementById("selectorPaisaje");
+    const ventana = document.getElementById("ventana");
+    const imagen = document.getElementById("imagenPaisaje");
+    const descripcion = document.getElementById("descripcionPaisaje");
+
+    const paisajes = {
+        bosque: {
+            img: "https://viajesporestadosunidos.wordpress.com/wp-content/uploads/2015/10/nueva-york.jpg",
+            desc: "Estados Unidos cuenta con paisajes naturales impresionantes y muy variados. Desde la grandiosidad del Gran Cañón, con sus paredes de roca roja que se iluminan al amanecer y atardecer, hasta los majestuosos Parques Nacionales de Yosemite, donde montañas, valles y cascadas crean escenarios inolvidables. En Yellowstone, los géiseres y aguas termales conviven con una abundante vida silvestre, ofreciendo un espectáculo natural único. Los Everglades muestran humedales subtropicales llenos de manglares y ríos, mientras que las Montañas Rocosas destacan con picos nevados, lagos cristalinos y extensos bosques que invitan a la aventura al aire libre.",
+            url: "https://americathebeautiful.com/es"
+        },
+        playa: {
+            img: "https://uvn-brightspot.s3.amazonaws.com/assets/vixes/c/ciudad-de-quebec-canada.jpg",
+            desc: "Canadá es un país lleno de paisajes majestuosos y variados. Sus Montañas Rocosas Canadienses ofrecen picos nevados y lagos cristalinos que reflejan la belleza de la naturaleza. Los extensos bosques boreales cubren gran parte del país, hogar de una fauna diversa. Las cataratas del Niágara destacan como un espectáculo impresionante de agua y fuerza natural. Además, las regiones costeras y fiordos muestran playas, acantilados y ríos que se mezclan con un entorno natural puro y sereno.",
+            url: "https://www.tourismgolden.com/?gad_source=1&gad_campaignid=6495625872&gbraid=0AAAAADFM2rERGiVkY-FyMnGLDLNKOXeqG&gclid=Cj0KCQjw58PGBhCkARIsADbDilzf39xiOoAsl8akiLsQkCyIcxnbRk-BEqsN298b74aB6l2DtyEZIDwaAhbxEALw_wcB"
+        },
+        montaña: {
+            img: "https://www.dondeir.com/wp-content/uploads/2017/02/destinos-con-paisajes-escondidos-en-mexico-12.jpg",
+            desc: "México es un país de contrastes donde conviven playas tropicales, desiertos áridos y altas montañas. Sus paisajes van desde el turquesa del Caribe en Cancún y la Riviera Maya, hasta las dunas doradas de Chihuahua y Sonora. También destacan las montañas nevadas del Pico de Orizaba y el Popocatépetl, así como los bosques y lagos del sur en Chiapas y Michoacán. La riqueza natural mexicana refleja su diversidad cultural y climática.",
+            url: "https://visitmexico.com/"
+        },
+        desierto: {
+            img: "https://media.istockphoto.com/id/876560704/es/foto/fuji-de-jap%C3%B3n-en-la-primavera.jpg?s=612x612&w=0&k=20&c=xx0xzo4GV4mJdEDPztEGMuMsmeBJru28Nh0KYDSNW6E=",
+            desc: "Japón combina la modernidad con escenarios naturales de gran belleza. Sus paisajes están marcados por montañas cubiertas de bosques, como los Alpes Japoneses, y por la icónica silueta del Monte Fuji. En primavera, los cerezos en flor tiñen de rosa los parques y templos, mientras que en otoño los arces pintan de rojo los caminos rurales. Sus costas ofrecen tanto playas tranquilas como acantilados dramáticos, creando un entorno equilibrado entre serenidad y fuerza natural.",
+            url: "https://www.japonal.com/viajar-a-japon/que-ver-en-japon/"
+        },
+         frio: {
+            img: "https://i.pinimg.com/originals/39/29/19/3929199f406367877871a24953fcd7d7.jpg",
+            desc: "Alemania se distingue por sus bosques densos, ríos caudalosos y castillos enclavados en colinas verdes. La Selva Negra ofrece paisajes montañosos cubiertos de pinos y pueblos pintorescos, mientras que el valle del Rin se adorna con viñedos y fortalezas medievales. En Baviera, los Alpes alemanes muestran picos nevados y lagos cristalinos, en contraste con las llanuras del norte y el mar del Norte y el Báltico, que aportan un aire marítimo al país.",
+            url: "https://es.hoteles.com/go/alemania/lugares-epicos-alemania"
+        },
+        romance: {
+            img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8HQ1cZQC6vKjUyi55aExsV32jwV4S2AvVlw&s",
+            desc: "Francia es reconocida por la variedad y elegancia de sus paisajes. El sur deslumbra con campos de lavanda en la Provenza y playas soleadas en la Riviera Francesa, mientras que el norte muestra acantilados blancos en Normandía y verdes praderas en Bretaña. Los Alpes franceses ofrecen escenarios imponentes para el esquí y el senderismo, y en el centro del país se extienden viñedos y colinas suaves. Cada región francesa tiene un carácter propio, reflejado en su naturaleza y tradiciones.",
+            url: "https://redperegrina.org/mas-destinos/turismo-en-francia/?gad_source=1&gad_campaignid=22910110988&gbraid=0AAAAApE-Vt5ee7vKa3-5aNoo_upLzy_Fu&gclid=Cj0KCQjw58PGBhCkARIsADbDilyl9E5yoPzR5DzRlxRFubaLrViMdk0C-ZTa4L64z9DhmMO9I5lTUm8aAmS5EALw_wcB"
+        }
+
+    };
+
+    selector.addEventListener("change", () => {
+        const valor = selector.value;
+
+        if (valor && paisajes[valor]) {
+            imagen.src = paisajes[valor].img;
+            descripcion.textContent = paisajes[valor].desc;
+            ventana.classList.add("visible");
+
+            // 👉 Al hacer clic en la imagen abre la URL
+            imagen.onclick = () => {
+                if (paisajes[valor].url) {
+                    window.open(paisajes[valor].url, "_blank");
+                }
+            };
+        } else {
+            ventana.classList.remove("visible");
+            imagen.src = "";
+            descripcion.textContent = "";
+            imagen.onclick = null; // quita evento si no hay selección
+        }
+    });
+    </script>
+    <h1>Lugares que tienes que visitar</h1>
+</body>
+</html>

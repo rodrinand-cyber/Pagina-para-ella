@@ -1,0 +1,53 @@
+body {
+    font-family: 'Times New Roman', Times, serif;
+    display: flex;
+    justify-content: flex-start;
+    padding: 20px;
+    background: linear-gradient(to right, #3f77ca, #e6f7ff);
+}
+
+h2 {
+    margin-right: 20px;
+}
+
+select {
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid #333;
+    background: white;
+}
+
+.ventana {
+    position: fixed;
+    top: 50%;
+    right: -450px; /* escondida */
+    transform: translateY(-50%);
+    width: 400px;
+    background: white;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    border-radius: 12px;
+    padding: 15px;
+    text-align: center;
+    transition: right 0.5s ease;
+}
+
+.ventana.visible {
+    right: 20px; /* aparece */
+}
+
+.ventana img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.ventana p {
+    font-size: 16px;
+    color: #333;
+}
+h1
+{
+  margin-left: 120px;
+
+}
